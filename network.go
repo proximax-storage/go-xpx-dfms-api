@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 
+	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
 )
@@ -16,4 +17,7 @@ type Network interface {
 
 	// Peers lists information about all connected peers
 	Peers(context.Context) ([]*peer.AddrInfo, error)
+
+	// Identity returns nodes public key
+	Identity(context.Context) (crypto.PubKey, error)
 }
