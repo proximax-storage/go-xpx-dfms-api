@@ -3,8 +3,6 @@ package api
 import (
 	"context"
 
-	"github.com/ipfs/go-cid"
-
 	idrive "github.com/proximax-storage/go-xpx-dfms-drive"
 )
 
@@ -16,7 +14,7 @@ type ContractClient interface {
 	Compose(ctx context.Context, space, duration uint64, opts ...ComposeOpt) (idrive.Contract, error)
 
 	// Lists all the contracts in which Node participates as an owner or member.
-	List(context.Context) ([]cid.Cid, error)
+	List(context.Context) ([]idrive.ID, error)
 
 	// Get searches for contract in local storage and/or in blockchain.
 	Get(context.Context, idrive.ID) (idrive.Contract, error)
@@ -28,7 +26,7 @@ type ContractClient interface {
 type ContractReplicator interface {
 	ContractClient
 
-	// Accept join contract by it's id.
+	// Accept joins contract by it's id.
 	// Can join only contracts awaiting new members.
 	Accept(context.Context, idrive.ID) error
 
