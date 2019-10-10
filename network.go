@@ -20,4 +20,7 @@ type Network interface {
 
 	// Identity returns nodes public key
 	Identity(context.Context) (crypto.PubKey, error)
+
+	// Addrs returns list of addresses node uses for p2p communications
+	Addrs(context.Context) ([]multiaddr.Multiaddr, error)
 }
