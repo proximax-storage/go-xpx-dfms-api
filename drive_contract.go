@@ -23,7 +23,7 @@ type ContractClient interface {
 	Get(context.Context, idrive.ID) (idrive.Contract, error)
 
 	// Amendments create subscription for Drive contract corrections for contract in local storage and/or in blockchain.
-	Amendments(context.Context, idrive.ID) (idrive.ContractSubscription, error)
+	Amendments(context.Context, idrive.ID) (ContractSubscription, error)
 }
 
 type ContractReplicator interface {
@@ -34,11 +34,11 @@ type ContractReplicator interface {
 	Accept(context.Context, idrive.ID) error
 
 	// Accepted returns subscription for accepted contracts by the node.
-	Accepted(context.Context) (idrive.ContractSubscription, error)
+	Accepted(context.Context) (ContractSubscription, error)
 
 	// Invites creates subscription for new contract invitations. Main use case is to have
 	// external contract acceptance logic.
-	Invites(context.Context) (idrive.InviteSubscription, error)
+	Invites(context.Context) (InviteSubscription, error)
 
 	// StartAccepting tells the node to receive ContractReplicator invitations and accept them with defined
 	// strategy. Method will make some basic validation regarding the contract before accepting.
@@ -54,3 +54,21 @@ type AcceptStrategy uint8
 const (
 	AcceptAll AcceptStrategy = 0
 )
+
+// InviteSubscription for DriveInvitations
+type InviteSubscription interface {
+	// Next waits and blocks till new Invitation is received
+	Next(context.Context) (idrive.Invite, error)
+
+	// Cancel stops subscription, like context canceling
+	Close() error
+}
+
+// ContractSubscription for Drive
+type ContractSubscription interface {
+	// Next waits and blocks till new Drive update received
+	Next(context.Context) (idrive.Contract, error)
+
+	// Cancel stops subscription, like context canceling
+	Close() error
+}

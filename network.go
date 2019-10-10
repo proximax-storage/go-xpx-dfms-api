@@ -19,7 +19,7 @@ type Network interface {
 	Peers(context.Context) ([]*peer.AddrInfo, error)
 
 	// Identity returns nodes public key
-	Identity(context.Context) (crypto.PubKey, error)
+	Identity(context.Context) (crypto.PubKey, error) // TODO Use of separate crypto package
 
 	// Addrs returns list of addresses node uses for p2p communications
 	Addrs(context.Context) ([]multiaddr.Multiaddr, error)
