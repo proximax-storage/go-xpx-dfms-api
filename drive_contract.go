@@ -14,13 +14,13 @@ type ContractClient interface {
 	// owner and tries to find members which agrees on specified parameters and options. It does not
 	// guarantee success on resolving members. On success persists contract locally and gives
 	// ability to use Drive.
-	Compose(ctx context.Context, space, duration uint64, opts ...ComposeOpt) (idrive.Contract, error)
+	Compose(ctx context.Context, space, duration uint64, opts ...ComposeOpt) (*idrive.BasicContract, error)
 
 	// Lists all the contracts in which Node participates as an owner or member.
 	List(context.Context) ([]idrive.ID, error)
 
 	// Get searches for contract in local storage and/or in blockchain.
-	Get(context.Context, idrive.ID) (idrive.Contract, error)
+	Get(context.Context, idrive.ID) (*idrive.BasicContract, error)
 
 	// Amendments create subscription for Drive contract corrections for contract in local storage and/or in blockchain.
 	Amendments(context.Context, idrive.ID) (ContractSubscription, error)
@@ -67,7 +67,7 @@ type InviteSubscription interface {
 // ContractSubscription for Drive
 type ContractSubscription interface {
 	// Next waits and blocks till new Drive update received
-	Next(context.Context) (idrive.Contract, error)
+	Next(context.Context) (*idrive.BasicContract, error)
 
 	// Cancel stops subscription, like context canceling
 	Close() error
