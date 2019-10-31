@@ -4,7 +4,6 @@ import (
 	"context"
 	"os"
 
-	"github.com/ipfs/go-cid"
 	files "github.com/ipfs/go-ipfs-files"
 
 	idrive "github.com/proximax-storage/go-xpx-dfms-drive"
@@ -13,7 +12,7 @@ import (
 type DriveFS interface {
 	// Add adds file or directory to the path of the contract
 	// NOTE: Makes changes only locally. Synchronise with replicators by using Flush option
-	Add(ctx context.Context, id idrive.ID, path string, file files.Node, opts ...DriveOption) (cid.Cid, error)
+	Add(ctx context.Context, id idrive.ID, path string, file files.Node, opts ...DriveOption) (idrive.ID, error)
 
 	// Get gets file or directory from the given path of the contract
 	// NOTE: Fetches data from remote replicators if not stored locally
