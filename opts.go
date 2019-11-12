@@ -44,6 +44,7 @@ type ComposeOpts struct {
 	PercentApprovers uint8
 	BillingPeriod    int64
 	BillingPrice     int64
+	Replicas         uint16
 }
 
 type ComposeOpt func(*ComposeOpts)
@@ -65,9 +66,16 @@ func BillingPrice(billingPrice int64) ComposeOpt {
 		opts.BillingPrice = billingPrice
 	}
 }
+
 func BillingPeriod(billingPeriod int64) ComposeOpt {
 	return func(opts *ComposeOpts) {
 		opts.BillingPeriod = billingPeriod
+	}
+}
+
+func Replicas(replicas uint16) ComposeOpt {
+	return func(opts *ComposeOpts) {
+		opts.Replicas = replicas
 	}
 }
 
