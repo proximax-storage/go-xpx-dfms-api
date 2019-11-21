@@ -3,7 +3,7 @@ package api
 import (
 	"context"
 	"os"
-	
+
 	"github.com/ipfs/go-cid"
 	files "github.com/ipfs/go-ipfs-files"
 
@@ -54,4 +54,7 @@ type DriveFS interface {
 
 	// Flush pushes state of the local Drive to all replicators
 	Flush(ctx context.Context, id idrive.ID) error
+
+	// Remove all local actions
+	Clean(ctx context.Context, id idrive.ID) error
 }
