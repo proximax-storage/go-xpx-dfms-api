@@ -58,7 +58,7 @@ const (
 // InviteSubscription for DriveInvitations
 type InviteSubscription interface {
 	// Next waits and blocks till new Invitation is received
-	Next(context.Context) (idrive.Invite, error)
+	Next(context.Context) (*idrive.Invite, error)
 
 	// Cancel stops subscription, like context canceling
 	Close() error
