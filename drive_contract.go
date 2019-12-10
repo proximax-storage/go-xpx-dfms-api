@@ -24,6 +24,9 @@ type ContractClient interface {
 
 	// Amendments create subscription for Drive contract corrections for contract in local storage and/or in blockchain.
 	Amendments(context.Context, idrive.ID) (ContractSubscription, error)
+
+	// Finish contract
+	Finish(context.Context, idrive.ID) (*idrive.Contract, error)
 }
 
 type ContractReplicator interface {
