@@ -9,7 +9,7 @@ import (
 
 var ErrAlreadyStarted = errors.New("accepting already started")
 
-type CommonContract interface {
+type ContractClient interface {
 	// Compose synchronously announces invites to the Network with current node as an
 	// owner and tries to find members which agrees on specified parameters and options. It does not
 	// guarantee success on resolving members. On success persists contract locally and gives
@@ -24,17 +24,13 @@ type CommonContract interface {
 
 	// Amendments create subscription for Drive contract corrections for contract in local storage and/or in blockchain.
 	Amendments(context.Context, idrive.ID) (ContractSubscription, error)
-}
-
-type ContractClient interface {
-	CommonContract
 
 	// Finish contract
 	Finish(context.Context, idrive.ID) (*idrive.Contract, error)
 }
 
 type ContractReplicator interface {
-	CommonContract
+	ContractClient
 
 	// Accept joins contract by it's id.
 	// Can join only contracts awaiting new members.
