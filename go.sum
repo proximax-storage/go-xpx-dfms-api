@@ -89,6 +89,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/proximax-storage/go-xpx-dfms-drive v0.2.0 h1:XO1/yfk8bVsZ+AAYAeUyhM4x5ippTopG/a1jL0T22gI=
 github.com/proximax-storage/go-xpx-dfms-drive v0.2.0/go.mod h1:ZBMu3WD0Z+W0keQ65pOeibvNl6iwO+evrudhKhB8c9E=
+github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20191217063523-56acad1f30ff h1:nsUnfNqTAcnpWurVwhar6Jf+7N/HjByZXe/O2ZhqPc8=
+github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20191217063523-56acad1f30ff/go.mod h1:ZBMu3WD0Z+W0keQ65pOeibvNl6iwO+evrudhKhB8c9E=
 github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
 github.com/smola/gocompat v0.2.0/go.mod h1:1B0MlxbmoZNo3h8guHp8HztB3BSYR5itql9qtVc0ypY=
 github.com/spacemonkeygo/spacelog v0.0.0-20180420211403-2296661a0572 h1:RC6RW7j+1+HkWaX/Yh71Ee5ZHaHYt7ZP4sQgUrm6cDU=

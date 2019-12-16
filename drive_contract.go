@@ -26,7 +26,7 @@ type ContractClient interface {
 	Amendments(context.Context, idrive.ID) (ContractSubscription, error)
 
 	// Finish contract
-	Finish(context.Context, idrive.ID) (*idrive.Contract, error)
+	Finish(context.Context, idrive.ID) error
 }
 
 type ContractReplicator interface {
