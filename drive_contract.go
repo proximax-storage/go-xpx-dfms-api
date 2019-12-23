@@ -2,8 +2,10 @@ package api
 
 import (
 	"context"
+	"crypto"
 	"errors"
 
+	"github.com/ipfs/go-cid"
 	idrive "github.com/proximax-storage/go-xpx-dfms-drive"
 )
 
@@ -24,6 +26,9 @@ type ContractClient interface {
 
 	// Amendments create subscription for Drive contract corrections for contract in local storage and/or in blockchain.
 	Amendments(context.Context, idrive.ID) (ContractSubscription, error)
+
+	// Verify initiates verification round between replicators.
+	Verify(context.Context, idrive.ID) (VerifyResult, error)
 
 	// Finish contract
 	Finish(context.Context, idrive.ID) error
@@ -57,6 +62,14 @@ type AcceptStrategy uint8
 const (
 	AcceptAll AcceptStrategy = 0
 )
+
+type VerifyResult []struct {
+	// Replicator which failed verification and was excluded from contract immediately
+	Replicator crypto.PublicKey
+
+	// List of defected blocks on which replicator failed verification
+	FaultyBlocks []cid.Cid
+}
 
 // InviteSubscription for DriveInvitations
 type InviteSubscription interface {
