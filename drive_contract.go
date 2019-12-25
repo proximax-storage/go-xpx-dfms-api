@@ -2,10 +2,8 @@ package api
 
 import (
 	"context"
-	"crypto"
 	"errors"
 
-	"github.com/ipfs/go-cid"
 	idrive "github.com/proximax-storage/go-xpx-dfms-drive"
 )
 
@@ -62,14 +60,6 @@ type AcceptStrategy uint8
 const (
 	AcceptAll AcceptStrategy = 0
 )
-
-type VerifyResult []struct {
-	// Replicator which failed verification and was excluded from contract immediately
-	Replicator crypto.PublicKey
-
-	// List of defected blocks on which replicator failed verification
-	FaultyBlocks []cid.Cid
-}
 
 // InviteSubscription for DriveInvitations
 type InviteSubscription interface {
