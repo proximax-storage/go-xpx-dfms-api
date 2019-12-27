@@ -42,13 +42,6 @@ type ContractReplicator interface {
 	// Invites creates subscription for new contract invitations. Main use case is to have
 	// external contract acceptance logic.
 	Invites(context.Context) (InviteSubscription, error)
-
-	// StartAccepting tells the node to receive ContractReplicator invitations and accept them with defined
-	// strategy. Method will make some basic validation regarding the contract before accepting.
-	StartAccepting(context.Context, AcceptStrategy) error
-
-	// StopAccepting tells the node to stop receiving new DriveContracts.
-	StopAccepting(context.Context) error
 }
 
 // AcceptStrategy is a predefined group of validators
