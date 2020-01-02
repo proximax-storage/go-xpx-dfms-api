@@ -44,13 +44,6 @@ type ContractReplicator interface {
 	Invites(context.Context) (InviteSubscription, error)
 }
 
-// AcceptStrategy is a predefined group of validators
-type AcceptStrategy uint8
-
-const (
-	AcceptAll AcceptStrategy = 0
-)
-
 // InviteSubscription for DriveInvitations
 type InviteSubscription interface {
 	// Next waits and blocks till new Invitation is received
