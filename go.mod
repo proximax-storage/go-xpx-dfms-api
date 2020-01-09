@@ -6,6 +6,8 @@ require (
 	github.com/ipfs/go-cid v0.0.4
 	github.com/ipfs/go-ipfs-files v0.0.6
 	github.com/libp2p/go-libp2p-core v0.3.0
-	github.com/multiformats/go-multiaddr v0.1.2
+	github.com/multiformats/go-multiaddr v0.2.0
+	github.com/multiformats/go-multihash v0.0.10
 	github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20191217063523-56acad1f30ff
+	github.com/stretchr/testify v1.4.0
 )

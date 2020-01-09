@@ -25,6 +25,9 @@ type ContractClient interface {
 	// Amendments create subscription for Drive contract corrections for contract in local storage and/or in blockchain.
 	Amendments(context.Context, idrive.ID) (ContractSubscription, error)
 
+	// Verify initiates verification round between replicators.
+	Verify(context.Context, idrive.ID) (VerifyResult, error)
+
 	// Finish contract
 	Finish(context.Context, idrive.ID) error
 }
