@@ -10,6 +10,9 @@ type Client interface {
 
 	// Network returns implementation of Network api
 	Network() Network
+
+	// Supercontract return implementation of Supercontract api
+	Supercontract() Supercontract
 }
 
 // api.Replicator is scope of different apis available for DFMS Replicator node
@@ -19,4 +22,7 @@ type Replicator interface {
 
 	// Network returns implementation of Network api
 	Network() Network
+
+	// Supercontract return implementation of Supercontract api
+	Supercontract() Supercontract
 }
