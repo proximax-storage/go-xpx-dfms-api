@@ -8,6 +8,7 @@ require (
 	github.com/libp2p/go-libp2p-core v0.3.0
 	github.com/multiformats/go-multiaddr v0.2.0
 	github.com/multiformats/go-multihash v0.0.10
-	github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20191217063523-56acad1f30ff
+	github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20200117134254-6e79de4d2457
 	github.com/stretchr/testify v1.4.0
+	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550 // indirect
 )

@@ -2,10 +2,10 @@ package api
 
 import (
 	"context"
-	"github.com/ipfs/go-cid"
 	idrive "github.com/proximax-storage/go-xpx-dfms-drive"
+	sc "github.com/proximax-storage/go-xpx-dfms-drive/supercontract"
 )
 
-type Supercontract interface {
-	Deploy(ctx context.Context, id idrive.ID, file cid.Cid, functions []string) error
+type SuperContract interface {
+	Deploy(ctx context.Context, id idrive.ID, file string, functions []*sc.Function) error
 }
