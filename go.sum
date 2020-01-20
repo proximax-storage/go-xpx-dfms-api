@@ -104,6 +104,8 @@ github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20191217063523-56acad1f30
 github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20191217063523-56acad1f30ff/go.mod h1:ZBMu3WD0Z+W0keQ65pOeibvNl6iwO+evrudhKhB8c9E=
 github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20200117134254-6e79de4d2457 h1:KZWbUpmuNP8YZxBF82K8QlBAy9WF+51hpYpDAO+6jUs=
 github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20200117134254-6e79de4d2457/go.mod h1:Rd8XH4qfDl1n7B3U5tAzgE0taiSpPMBI3iCVeWcQaWw=
+github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20200120154354-459c6896361a h1:OzeBH4H4k0kgh6m0lOeOmyBMobNDLV+YWvV6TQZ22ek=
+github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20200120154354-459c6896361a/go.mod h1:Rd8XH4qfDl1n7B3U5tAzgE0taiSpPMBI3iCVeWcQaWw=
 github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
 github.com/smola/gocompat v0.2.0 h1:6b1oIMlUXIpz//VKEDzPVBK8KG7beVwmHIUEBIs/Pns=
 github.com/smola/gocompat v0.2.0/go.mod h1:1B0MlxbmoZNo3h8guHp8HztB3BSYR5itql9qtVc0ypY=
