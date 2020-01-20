@@ -13,7 +13,6 @@ var ErrInvalidDriveSpace = errors.New("drive Space can't be 0 or less")
 var ErrInvalidDuration = errors.New("duration can't be 0 or less")
 var ErrInvalidReplicas = errors.New("count of replicas can't be 0 or less")
 var ErrInvalidBillingPeriod = errors.New("billing period can't be 0 or less")
-var ErrInvalidBillingPrice = errors.New("billing price can't be 0 or less")
 var ErrInvalidBillingPeriodMultiply = errors.New("billing period is not a multiple of the duration")
 var ErrInvalidPercentApprovers = errors.New("percent of approvers can't be 0 or less")
 var ErrInvalidMinReplicators = errors.New("a minimum count of replicators can't be 0 or less")
@@ -99,7 +98,7 @@ func Replicas(replicas uint16) ComposeOpt {
 }
 
 // Parse parses the given options and return composeOpts
-func Parse(space, duration uint64, options ...ComposeOpt) (*composeOpts, error) {
+func ParseOpt(space, duration uint64, options ...ComposeOpt) (*composeOpts, error) {
 	opts := &composeOpts{
 		Replicas:         replicasDefault,
 		MinReplicators:   minReplicasDefault,
