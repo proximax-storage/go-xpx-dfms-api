@@ -2,6 +2,13 @@ package api
 
 import "errors"
 
+const (
+	replicasDefault         = uint16(3)
+	minReplicasDefault      = uint16(3)
+	percentApproversDefault = uint8(66)
+	billingPeriodDefault    = int64(172800)
+)
+
 var ErrInvalidDriveSpace = errors.New("drive Space can't be 0 or less")
 var ErrInvalidDuration = errors.New("duration can't be 0 or less")
 var ErrInvalidReplicas = errors.New("count of replicas can't be 0 or less")
@@ -91,16 +98,16 @@ func Replicas(replicas uint16) ComposeOpt {
 	}
 }
 
-// Apply applies the given options to this DiscoveryOpts
-func Apply(space, duration uint64, options ...ComposeOpt) (*composeOpts, error) {
-	opts := new(composeOpts)
+// Parse parses the given options and return composeOpts
+func Parse(space, duration uint64, options ...ComposeOpt) (*composeOpts, error) {
+	opts := &composeOpts{
+		Replicas:         replicasDefault,
+		MinReplicators:   minReplicasDefault,
+		BillingPeriod:    billingPeriodDefault,
+		PercentApprovers: percentApproversDefault,
+	}
 	for _, o := range options {
 		o(opts)
-	}
-
-	err := validate(space, duration, opts)
-	if err != nil {
-		return nil, err
 	}
 
 	return opts, validate(space, duration, opts)
@@ -110,11 +117,11 @@ func validate(space, duration uint64, opts *composeOpts) error {
 	if opts.BillingPeriod <= 0 {
 		return ErrInvalidBillingPeriod
 	}
-	if opts.BillingPrice <= 0 {
-		return ErrInvalidBillingPrice
-	}
 	if opts.Replicas <= 0 {
 		return ErrInvalidReplicas
+	}
+	if opts.BillingPrice <= 0 {
+		opts.BillingPrice = int64(space) * int64(opts.Replicas)
 	}
 	if opts.MinReplicators <= 0 {
 		return ErrInvalidMinReplicators
