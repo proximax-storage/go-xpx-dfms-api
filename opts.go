@@ -98,7 +98,7 @@ func Replicas(replicas uint16) ComposeOpt {
 }
 
 // Parse parses the given options and return composeOpts
-func ParseOpt(space, duration uint64, options ...ComposeOpt) (*composeOpts, error) {
+func Parse(space, duration uint64, options ...ComposeOpt) (*composeOpts, error) {
 	opts := &composeOpts{
 		Replicas:         replicasDefault,
 		MinReplicators:   minReplicasDefault,
