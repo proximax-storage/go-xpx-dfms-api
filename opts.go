@@ -103,7 +103,7 @@ func Apply(space, duration uint64, options ...ComposeOpt) (*composeOpts, error) 
 		return nil, err
 	}
 
-	return opts, nil
+	return opts, validate(space, duration, opts)
 }
 
 func validate(space, duration uint64, opts *composeOpts) error {
