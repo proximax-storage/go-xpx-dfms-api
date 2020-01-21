@@ -63,6 +63,7 @@ type composeOpts struct {
 	BillingPeriod    int64
 	BillingPrice     int64
 	Replicas         uint16
+	PrivateKey       []byte
 }
 
 type ComposeOpt func(*composeOpts)
@@ -94,6 +95,12 @@ func BillingPeriod(billingPeriod int64) ComposeOpt {
 func Replicas(replicas uint16) ComposeOpt {
 	return func(opts *composeOpts) {
 		opts.Replicas = replicas
+	}
+}
+
+func PrivateKey(pk []byte) ComposeOpt {
+	return func(opts *composeOpts) {
+		opts.PrivateKey = pk
 	}
 }
 
