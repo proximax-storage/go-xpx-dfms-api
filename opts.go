@@ -1,6 +1,10 @@
 package api
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/libp2p/go-libp2p-core/crypto"
+)
 
 const (
 	replicasDefault         = uint16(3)
@@ -63,7 +67,7 @@ type composeOpts struct {
 	BillingPeriod    int64
 	BillingPrice     int64
 	Replicas         uint16
-	PrivateKey       string
+	PrivateKey       crypto.PrivKey
 }
 
 type ComposeOpt func(*composeOpts)
@@ -98,7 +102,7 @@ func Replicas(replicas uint16) ComposeOpt {
 	}
 }
 
-func PrivateKey(pk string) ComposeOpt {
+func PrivateKey(pk crypto.PrivKey) ComposeOpt {
 	return func(opts *composeOpts) {
 		opts.PrivateKey = pk
 	}
