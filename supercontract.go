@@ -12,4 +12,5 @@ type SuperContract interface {
 	Execute(ctx context.Context, id sc.ID, gas uint64, function string, functionParams []int64) error
 
 	GetSuperContract(context.Context, sc.ID) (*sc.SuperContract, error)
+	List(context.Context, idrive.ID) ([]*sc.SuperContract, error)
 }
