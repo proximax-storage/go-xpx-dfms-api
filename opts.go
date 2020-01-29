@@ -2,22 +2,23 @@ package api
 
 import (
 	"errors"
-
 	"github.com/libp2p/go-libp2p-core/crypto"
 )
 
 const (
-	replicasDefault         = uint16(3)
-	minReplicasDefault      = uint16(3)
-	percentApproversDefault = uint8(66)
-	billingPeriodDefault    = int64(172800)
+	replicasDefault             = uint16(3)
+	minReplicasDefault          = uint16(3)
+	percentApproversDefault     = uint8(66)
+	numberBillingPeriodsDefault = int64(3)
+
+	oneBlockTime      = 15
+	minBillingPeriods = 60 / oneBlockTime
 )
 
-var ErrInvalidDriveSpace = errors.New("drive Space can't be 0 or less")
-var ErrInvalidDuration = errors.New("duration can't be 0 or less")
+var ErrInvalidDriveSpace = errors.New("drive space can't be 0 or less")
+var ErrInvalidBillingPeriod = errors.New("billing period can't be less 1min")
 var ErrInvalidReplicas = errors.New("count of replicas can't be 0 or less")
-var ErrInvalidBillingPeriod = errors.New("billing period can't be 0 or less")
-var ErrInvalidBillingPeriodMultiply = errors.New("billing period is not a multiple of the duration")
+var ErrInvalidNumberBillingPeriod = errors.New("the number of billing periods cannot be 0 or less")
 var ErrInvalidPercentApprovers = errors.New("percent of approvers can't be 0 or less")
 var ErrInvalidMinReplicators = errors.New("a minimum count of replicators can't be 0 or less")
 var ErrManyMinReplicators = errors.New("a minimum count of replicators can't be more than count of replicas")
@@ -62,12 +63,12 @@ func ParseDriveOptions(opts ...DriveOption) *DriveOptions {
 }
 
 type composeOpts struct {
-	MinReplicators   uint16
-	PercentApprovers uint8
-	BillingPeriod    int64
-	BillingPrice     int64
-	Replicas         uint16
-	PrivateKey       crypto.PrivKey
+	MinReplicators       uint16
+	PercentApprovers     uint8
+	NumberBillingPeriods int64
+	BillingPrice         int64
+	Replicas             uint16
+	PrivateKey           crypto.PrivKey
 }
 
 type ComposeOpt func(*composeOpts)
@@ -90,9 +91,9 @@ func BillingPrice(billingPrice int64) ComposeOpt {
 	}
 }
 
-func BillingPeriod(billingPeriod int64) ComposeOpt {
+func NumberBillingPeriods(numberBillingPeriods int64) ComposeOpt {
 	return func(opts *composeOpts) {
-		opts.BillingPeriod = billingPeriod
+		opts.NumberBillingPeriods = numberBillingPeriods
 	}
 }
 
@@ -109,24 +110,22 @@ func PrivateKey(pk crypto.PrivKey) ComposeOpt {
 }
 
 // Parse parses the given options and return composeOpts
-func Parse(space, duration uint64, options ...ComposeOpt) (*composeOpts, error) {
+func Parse(space, billingPeriod uint64, options ...ComposeOpt) (*composeOpts, error) {
 	opts := &composeOpts{
-		Replicas:         replicasDefault,
-		MinReplicators:   minReplicasDefault,
-		BillingPeriod:    billingPeriodDefault,
-		PercentApprovers: percentApproversDefault,
+		Replicas:             replicasDefault,
+		MinReplicators:       minReplicasDefault,
+		NumberBillingPeriods: numberBillingPeriodsDefault,
+		PercentApprovers:     percentApproversDefault,
 	}
 	for _, o := range options {
 		o(opts)
 	}
 
-	return opts, validate(space, duration, opts)
+	return opts, validate(space, billingPeriod, opts)
 }
 
-func validate(space, duration uint64, opts *composeOpts) error {
-	if opts.BillingPeriod <= 0 {
-		return ErrInvalidBillingPeriod
-	}
+//validate validates passed arguments and composeOpts
+func validate(space, billingPeriod uint64, opts *composeOpts) error {
 	if opts.Replicas <= 0 {
 		return ErrInvalidReplicas
 	}
@@ -142,14 +141,14 @@ func validate(space, duration uint64, opts *composeOpts) error {
 	if opts.MinReplicators > opts.Replicas {
 		return ErrManyMinReplicators
 	}
+	if opts.NumberBillingPeriods <= 0 {
+		return ErrInvalidNumberBillingPeriod
+	}
 	if space <= 0 {
 		return ErrInvalidDriveSpace
 	}
-	if duration <= 0 {
-		return ErrInvalidDuration
-	}
-	if duration%uint64(opts.BillingPeriod) != 0 {
-		return ErrInvalidBillingPeriodMultiply
+	if billingPeriod < minBillingPeriods {
+		return ErrInvalidBillingPeriod
 	}
 	return nil
 }

@@ -2,12 +2,8 @@ package api
 
 import (
 	"context"
-	"errors"
-
 	idrive "github.com/proximax-storage/go-xpx-dfms-drive"
 )
-
-var ErrAlreadyStarted = errors.New("accepting already started")
 
 type ContractClient interface {
 	// Compose synchronously announces invites to the Network with current node as an
