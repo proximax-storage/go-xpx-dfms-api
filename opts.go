@@ -8,16 +8,15 @@ import (
 )
 
 const (
-	minSubPeriod = time.Minute
-
-	replicasDefault             = uint16(3)
-	minReplicasDefault          = uint16(3)
-	percentApproversDefault     = uint8(66)
-	numberBillingPeriodsDefault = int64(3)
+	minSubPeriod                     = time.Minute
+	replicasDefault                  = uint16(3)
+	minReplicasDefault               = uint16(3)
+	percentApproversDefault          = uint8(66)
+	numberSubscriptionPeriodsDefault = int64(3)
 )
 
 var ErrInvalidDriveSpace = errors.New("drive space can't be 0 or less")
-var ErrInvalidBillingPeriod = errors.New("billing period can't be less 1min")
+var ErrInvalidSubscriptionPeriod = errors.New("subscription period can't be less 1min")
 var ErrManyMinReplicators = errors.New("a minimum count of replicators can't be more than count of replicas")
 
 type DriveOption func(opts *DriveOptions)
@@ -60,12 +59,12 @@ func ParseDriveOptions(opts ...DriveOption) *DriveOptions {
 }
 
 type composeOpts struct {
-	MinReplicators       uint16
-	PercentApprovers     uint8
-	NumberBillingPeriods int64
-	BillingPrice         int64
-	Replicas             uint16
-	PrivateKey           crypto.PrivKey
+	MinReplicators            uint16
+	PercentApprovers          uint8
+	NumberSubscriptionPeriods int64
+	SubscriptionPrice         int64
+	Replicas                  uint16
+	PrivateKey                crypto.PrivKey
 }
 
 type ComposeOpt func(*composeOpts)
@@ -86,18 +85,18 @@ func PercentApprovers(percentApprovers uint8) ComposeOpt {
 	}
 }
 
-func BillingPrice(billingPrice int64) ComposeOpt {
+func SubscriptionPrice(SubscriptionPrice int64) ComposeOpt {
 	return func(opts *composeOpts) {
-		if billingPrice > 0 {
-			opts.BillingPrice = billingPrice
+		if SubscriptionPrice > 0 {
+			opts.SubscriptionPrice = SubscriptionPrice
 		}
 	}
 }
 
-func NumberBillingPeriods(numberBillingPeriods int64) ComposeOpt {
+func NumberSubscriptionPeriods(numberSubscriptionPeriods int64) ComposeOpt {
 	return func(opts *composeOpts) {
-		if numberBillingPeriods > 0 {
-			opts.NumberBillingPeriods = numberBillingPeriods
+		if numberSubscriptionPeriods > 0 {
+			opts.NumberSubscriptionPeriods = numberSubscriptionPeriods
 		}
 	}
 }
@@ -117,18 +116,18 @@ func PrivateKey(pk crypto.PrivKey) ComposeOpt {
 }
 
 // Parse parses the given options and return composeOpts
-func Parse(space uint64, billingPeriod time.Duration, options ...ComposeOpt) (*composeOpts, error) {
+func Parse(space uint64, subPeriod time.Duration, options ...ComposeOpt) (*composeOpts, error) {
 	opts := &composeOpts{
-		Replicas:             replicasDefault,
-		MinReplicators:       minReplicasDefault,
-		NumberBillingPeriods: numberBillingPeriodsDefault,
-		PercentApprovers:     percentApproversDefault,
+		Replicas:                  replicasDefault,
+		MinReplicators:            minReplicasDefault,
+		NumberSubscriptionPeriods: numberSubscriptionPeriodsDefault,
+		PercentApprovers:          percentApproversDefault,
 	}
 	for _, o := range options {
 		o(opts)
 	}
 
-	return opts, validate(space, billingPeriod, opts)
+	return opts, validate(space, subPeriod, opts)
 }
 
 //validate validates passed arguments and composeOpts
@@ -137,10 +136,10 @@ func validate(space uint64, subPeriod time.Duration, opts *composeOpts) error {
 		return ErrInvalidDriveSpace
 	}
 	if subPeriod < minSubPeriod {
-		return ErrInvalidBillingPeriod
+		return ErrInvalidSubscriptionPeriod
 	}
-	if opts.BillingPrice <= 0 {
-		opts.BillingPrice = int64(space) * int64(opts.Replicas)
+	if opts.SubscriptionPrice <= 0 {
+		opts.SubscriptionPrice = int64(space) * int64(opts.Replicas)
 	}
 	if opts.MinReplicators > opts.Replicas {
 		return ErrManyMinReplicators
