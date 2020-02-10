@@ -2,19 +2,17 @@ package api
 
 import (
 	"context"
-	"errors"
+	"time"
 
 	idrive "github.com/proximax-storage/go-xpx-dfms-drive"
 )
-
-var ErrAlreadyStarted = errors.New("accepting already started")
 
 type ContractClient interface {
 	// Compose synchronously announces invites to the Network with current node as an
 	// owner and tries to find members which agrees on specified parameters and options. It does not
 	// guarantee success on resolving members. On success persists contract locally and gives
 	// ability to use Drive.
-	Compose(ctx context.Context, space, duration uint64, opts ...ComposeOpt) (*idrive.Contract, error)
+	Compose(ctx context.Context, space uint64, subPeriod time.Duration, opts ...ComposeOpt) (*idrive.Contract, error)
 
 	// Lists all the contracts in which Node participates as an owner or member.
 	List(context.Context) ([]idrive.ID, error)
