@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 
+	"github.com/ipfs/go-cid"
 	idrive "github.com/proximax-storage/go-xpx-dfms-drive"
 	sc "github.com/proximax-storage/go-xpx-dfms-drive/supercontract"
 )
@@ -13,4 +14,5 @@ type SuperContract interface {
 
 	Get(context.Context, sc.ID) (*sc.SuperContract, error)
 	List(context.Context, idrive.ID) ([]sc.ID, error)
+	GetResults(ctx context.Context, id cid.Cid) ([]string, error)
 }
