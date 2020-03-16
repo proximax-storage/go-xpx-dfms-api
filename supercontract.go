@@ -15,5 +15,5 @@ type SuperContract interface {
 	Get(context.Context, sc.ID) (*sc.SuperContract, error)
 	List(context.Context, idrive.ID) ([]sc.ID, error)
 	GetResults(ctx context.Context, id cid.Cid) ([]string, error)
-	GetSuperContractExecutionsHash(ctx context.Context, id sc.ID) ([]cid.Cid, error)
+	GetSuperContractExecutionsHashes(ctx context.Context, id sc.ID) ([]cid.Cid, error)
 }
