@@ -11,6 +11,7 @@ import (
 type SuperContract interface {
 	Deploy(ctx context.Context, id idrive.ID, file string) (sc.ID, error)
 	Execute(ctx context.Context, id sc.ID, gas uint64, function sc.Function) (cid.Cid, error)
+	Deactivate(ctx context.Context, id sc.ID) error
 
 	Get(context.Context, sc.ID) (*sc.SuperContract, error)
 	List(context.Context, idrive.ID) ([]sc.ID, error)
