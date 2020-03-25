@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/ipfs/go-cid"
+	"github.com/libp2p/go-libp2p-core/crypto"
 	idrive "github.com/proximax-storage/go-xpx-dfms-drive"
 	sc "github.com/proximax-storage/go-xpx-dfms-drive/supercontract"
 )
@@ -16,5 +17,5 @@ type SuperContract interface {
 	Get(context.Context, sc.ID) (*sc.SuperContract, error)
 	List(context.Context, idrive.ID) ([]sc.ID, error)
 	GetResults(ctx context.Context, id cid.Cid) ([]string, error)
-	GetSuperContractExecutionsHashes(ctx context.Context, id sc.ID) ([]cid.Cid, error)
+	GetSuperContractExecutionsHashes(ctx context.Context, self crypto.PubKey) ([]cid.Cid, error)
 }
