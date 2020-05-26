@@ -3,7 +3,7 @@ package api
 import (
 	"context"
 	"os"
-	
+
 	"github.com/ipfs/go-cid"
 	files "github.com/ipfs/go-ipfs-files"
 
@@ -18,6 +18,10 @@ type DriveFS interface {
 	// Get gets file or directory from the given path of the contract
 	// NOTE: Fetches data from remote replicators if not stored locally
 	Get(ctx context.Context, id idrive.ID, path string, opts ...DriveOption) (files.Node, error)
+
+	// File gets the file from the Drive by given cid.
+	// It is an alternative for the Get method to retrieve file in cases where path is unknown or simple redundant.
+	File(ctx context.Context, id idrive.ID, cid cid.Cid, opts ...DriveOption) (files.Node, error)
 
 	// Remove removes the file or directory from the path
 	// NOTE: Removes only reference to the file. Fully remove by using Clear option
