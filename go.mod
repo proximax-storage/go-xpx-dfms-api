@@ -9,6 +9,6 @@ require (
 	github.com/multiformats/go-multiaddr v0.2.0
 	github.com/multiformats/go-multihash v0.0.10
 	github.com/proximax-storage/go-xpx-dfms-drive v0.2.1-0.20200128151550-5d6565ba489f
-	github.com/stretchr/testify v1.4.0
+	github.com/stretchr/testify v1.6.0
 	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550 // indirect
 )
