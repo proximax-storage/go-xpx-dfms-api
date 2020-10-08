@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"errors"
 	"os"
 
 	"github.com/ipfs/go-cid"
@@ -9,6 +10,8 @@ import (
 
 	idrive "github.com/proximax-storage/go-xpx-dfms-drive"
 )
+
+var ErrNotEnoughReplicators = errors.New("cannot flush the drive with the count of replicators less than 2")
 
 type DriveFS interface {
 	// Add adds file or directory to the path of the contract
