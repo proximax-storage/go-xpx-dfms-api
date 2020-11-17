@@ -12,7 +12,7 @@ import (
 )
 
 var ErrNotEnoughReplicators = errors.New("cannot flush the drive with the count of replicators less than 2")
-var ErrOperationIsNotPermitted = errors.New("cannot flush the drive because operation is not permitted")
+var ErrNoPermission = errors.New("no permission")
 
 type DriveFS interface {
 	// Add adds file or directory to the path of the contract
