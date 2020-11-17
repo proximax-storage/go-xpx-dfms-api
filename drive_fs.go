@@ -28,7 +28,7 @@ type DriveFS interface {
 	File(ctx context.Context, id idrive.ID, cid cid.Cid, opts ...DriveOption) (files.Node, error)
 
 	// Remove removes the file or directory from the path
-	// NOTE: Removes only reference to the file.
+	// NOTE: Removes only reference to the file. If reference is last, then remove file.
 	// NOTE: Makes changes only locally. Synchronise with replicators by using Flush option
 	Remove(ctx context.Context, id idrive.ID, path string, opts ...DriveOption) error
 
