@@ -28,7 +28,7 @@ type DriveFS interface {
 	File(ctx context.Context, id idrive.ID, cid cid.Cid, opts ...DriveOption) (files.Node, error)
 
 	// Remove removes the file or directory from the path
-	// NOTE: Removes only reference to the file. Fully remove by using Clear option
+	// NOTE: Removes only reference to the file. If the reference is las and the file is cached, then it removes the file from the cache.
 	// NOTE: Makes changes only locally. Synchronise with replicators by using Flush option
 	Remove(ctx context.Context, id idrive.ID, path string, opts ...DriveOption) error
 
@@ -62,4 +62,7 @@ type DriveFS interface {
 
 	// Flush pushes state of the local Drive to all replicators
 	Flush(ctx context.Context, id idrive.ID) error
+
+	// Clear clears all files locally
+	Clear(ctx context.Context, opts ...DriveOption) error
 }
