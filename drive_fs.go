@@ -63,6 +63,6 @@ type DriveFS interface {
 	// Flush pushes state of the local Drive to all replicators
 	Flush(ctx context.Context, id idrive.ID) error
 
-	// Clear clears all files locally
-	Clear(ctx context.Context, opts ...DriveOption) error
+	// Clear clears all drive files locally
+	Clear(ctx context.Context, id idrive.ID, opts ...DriveOption) error
 }
