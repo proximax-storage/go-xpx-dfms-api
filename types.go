@@ -5,6 +5,13 @@ import (
 	"github.com/libp2p/go-libp2p-core/crypto"
 )
 
+type NodeType string
+
+const (
+	ReplicatorType NodeType = "replicator"
+	ClientType     NodeType = "client"
+)
+
 type VerifyResult []struct {
 	// Replicator which failed verification and was excluded from contract immediately
 	Replicator crypto.PubKey

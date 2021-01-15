@@ -3,6 +3,9 @@ package api
 type Node interface {
 	// Network returns implementation of Network api
 	Network() Network
+
+	// Type returns type of node
+	Type() NodeType
 }
 
 // api.Client is scope of different apis available for DFMS Client node
