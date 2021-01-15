@@ -1,10 +1,16 @@
 package api
 
 import (
+	"encoding/json"
+
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/crypto"
 )
 
+// Note: should be updated manually
+const apiVersion = "0.4.1"
+
+// DFMS node type
 type NodeType string
 
 const (
@@ -32,4 +38,28 @@ func (res *VerifyResult) UnmarshalJSON(data []byte) error {
 
 	*res = out
 	return nil
+}
+
+// NewVersion creates new version with current ApiVersion and wanted BuildVersion
+func NewVersion(buildVersion string) *Version {
+	return &Version{
+		ApiVersion:   apiVersion,
+		BuildVersion: buildVersion,
+	}
+}
+
+type Version struct {
+	// Current version of API
+	ApiVersion string
+
+	// Current version of app build
+	BuildVersion string
+}
+
+func (v Version) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v)
+}
+
+func (v *Version) UnmarshalJSON(data []byte) error {
+	return json.Unmarshal(data, v)
 }

@@ -1,11 +1,16 @@
 package api
 
+import "context"
+
 type Node interface {
 	// Network returns implementation of Network api
 	Network() Network
 
 	// Type returns type of node
 	Type() NodeType
+
+	// Version returns a version of API
+	Version(ctx context.Context) (string, error)
 }
 
 // api.Client is scope of different apis available for DFMS Client node
