@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/crypto"
@@ -40,26 +41,35 @@ func (res *VerifyResult) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// NewVersion creates new version with current ApiVersion and wanted BuildVersion
-func NewVersion(buildVersion string) *Version {
-	return &Version{
-		ApiVersion:   apiVersion,
-		BuildVersion: buildVersion,
+// NewVersion creates new version with current API and wanted Build
+func NewVersion(buildVersion string) *Versions {
+	return &Versions{
+		API:   apiVersion,
+		Build: buildVersion,
 	}
 }
 
-type Version struct {
+type Versions struct {
 	// Current version of API
-	ApiVersion string
+	API string
 
 	// Current version of app build
-	BuildVersion string
+	Build string
 }
 
-func (v Version) MarshalJSON() ([]byte, error) {
+func (v Versions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v)
 }
 
-func (v *Version) UnmarshalJSON(data []byte) error {
+func (v *Versions) UnmarshalJSON(data []byte) error {
 	return json.Unmarshal(data, v)
+}
+
+func (v *Versions) String() string {
+	return fmt.Sprintf(
+		"API Version: %s\n"+
+			"Build Version: %s\n",
+		v.API,
+		v.Build,
+	)
 }

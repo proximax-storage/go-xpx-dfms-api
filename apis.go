@@ -9,8 +9,8 @@ type Node interface {
 	// Type returns type of node
 	Type() NodeType
 
-	// Version returns a version of API
-	Version(ctx context.Context) (string, error)
+	// Versions returns a version of API
+	Version(ctx context.Context) (*Versions, error)
 }
 
 // api.Client is scope of different apis available for DFMS Client node
