@@ -9,7 +9,7 @@ type Node interface {
 	// Type returns type of node
 	Type() NodeType
 
-	// Versions returns a version of API
+	// Version returns Versions of a node
 	Version(ctx context.Context) (*Versions, error)
 }
 
