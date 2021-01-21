@@ -9,14 +9,14 @@ import (
 )
 
 // Note: should be updated manually
-const apiVersion = "0.4.1"
+const apiVersion = "0.5.1"
 
 // DFMS node type
 type NodeType string
 
 const (
-	ReplicatorType NodeType = "replicator"
-	ClientType     NodeType = "client"
+	ReplicatorType NodeType = "dfms-replicator"
+	ClientType     NodeType = "dfms-client"
 )
 
 type VerifyResult []struct {
@@ -42,8 +42,8 @@ func (res *VerifyResult) UnmarshalJSON(data []byte) error {
 }
 
 // NewVersion creates new Version and fill all fields
-func NewVersion(build, commit, date, system, gv string) *Version {
-	return &Version{
+func NewVersion(build, commit, date, system, gv string) Version {
+	return Version{
 		API:       apiVersion,
 		Build:     build,
 		Commit:    commit,
