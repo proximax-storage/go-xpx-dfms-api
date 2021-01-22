@@ -5,7 +5,7 @@ import (
 )
 
 type Node interface {
-	//Ledger returns implementation of Ledger api
+	// Ledger returns implementation of Ledger api
 	Ledger() Ledger
 
 	// Network returns implementation of Network api
