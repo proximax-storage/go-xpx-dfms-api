@@ -3,6 +3,9 @@ package api
 import "context"
 
 type Node interface {
+	// Ledger returns implementation of Ledger api
+	Ledger() Ledger
+	
 	// Network returns implementation of Network api
 	Network() Network
 
